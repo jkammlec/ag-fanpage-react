@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 
 export default function Contacto() {
-  // 1. Creamos estados para cada campo del formulario en lugar de usar getElementById
+  // Estados para cada campo del formulario en lugar de usar getElementById
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
   const [genero, setGenero] = useState('');
   const [mensaje, setMensaje] = useState('');
 
-  // 2. Estado para manejar la alerta (tipo success o danger, y el texto)
+  // Estado para manejar la alerta (tipo success o danger, y el texto)
   const [alerta, setAlerta] = useState({ mensaje: '', tipo: '' });
   
-  // Estado para saber si ya pasamos la validación final
+  // Estado para saber si ya pasó la validación final
   const [enviado, setEnviado] = useState(false);
 
-  // Funciones de validación con tus expresiones regulares originales
+  // Funciones de validación con regex
   const validarNombre = (nombre) => {
     const expresionNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}$/;
     return expresionNombre.test(nombre);
@@ -25,44 +25,42 @@ export default function Contacto() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Evita que la página recargue al enviar[cite: 7, 8]
+    e.preventDefault(); // Evita que la página recargue al enviar
     
-    // Limpiamos los espacios en blanco de los extremos como en tu código original[cite: 7]
+    // Limpiar los espacios en blanco de los extremos
     const nombreVal = nombre.trim();
     const correoVal = correo.trim();
     const mensajeVal = mensaje.trim();
     
-    // Limpiamos cualquier alerta previa[cite: 7]
+    // Limpieza de alerta
     setAlerta({ mensaje: '', tipo: '' });
 
-    // Validamos que los campos obligatorios no estén vacíos[cite: 7]
+    // Validar que los campos obligatorios no estén vacíos
     if (nombreVal === '' || correoVal === '' || mensajeVal === '') {
       setAlerta({ mensaje: 'Por favor, completa todos los campos requeridos.', tipo: 'danger' });
       return;
     }
 
-    // 1. Validar nombre[cite: 7]
+    //Validar nombre
     if (!validarNombre(nombreVal)) {
       setAlerta({ mensaje: 'El nombre solo debe contener letras y espacios (mínimo 2 caracteres).', tipo: 'danger' });
       return;
     }
 
-    // 2. Validar correo electrónico[cite: 7]
+    // Validar correo
     if (!validarCorreo(correoVal)) {
       setAlerta({ mensaje: 'Por favor, ingresa un correo electrónico válido.', tipo: 'danger' });
       return;
     }
 
-    // 3. Validar selección de género[cite: 7]
+    // Validar selección de género
     if (genero === '') {
       setAlerta({ mensaje: 'Por favor, selecciona una opción de género.', tipo: 'danger' });
       return;
     }
 
-    // Si todo pasa con éxito[cite: 7]
     setAlerta({ mensaje: '¡Formulario validado con éxito! Enviando tu mensaje...', tipo: 'success' });
     
-    // Opcional: Ocultar el formulario después de un par de segundos
     setTimeout(() => {
       setEnviado(true);
     }, 2000);
@@ -91,7 +89,7 @@ export default function Contacto() {
 
                 <div className="mb-3">
                   <label className="form-label">Nombre</label>
-                  {/* Agregamos value y onChange para conectar el input con el estado */}
+                  {/* Agregar value y onChange para conectar el input con el estado */}
                   <input 
                     type="text" 
                     className="form-control" 
@@ -169,7 +167,6 @@ export default function Contacto() {
                   ></textarea>
                 </div>
 
-                {/* Mostrar alerta dinámica si existe */}
                 {alerta.mensaje && (
                   <div className={`alert alert-${alerta.tipo} alert-dismissible fade show`} role="alert">
                     {alerta.mensaje}

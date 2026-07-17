@@ -47,19 +47,19 @@ export default function Musica() {
           <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src="/img/AG1.jpg" className="d-block w-100" alt="AG1" />
+                <img src="./img/AG1.jpg" className="d-block w-100" alt="AG1" />
               </div>
               <div className="carousel-item">
-                <img src="/img/AG2.jpg" className="d-block w-100" alt="AG2" />
+                <img src="./img/AG2.jpg" className="d-block w-100" alt="AG2" />
               </div>
               <div className="carousel-item">
-                <img src="/img/AG3.jpg" className="d-block w-100" alt="AG3" />
+                <img src="./img/AG3.jpg" className="d-block w-100" alt="AG3" />
               </div>
               <div className="carousel-item">
-                <img src="/img/AG4.jpg" className="d-block w-100" alt="AG4" />
+                <img src="./img/AG4.jpg" className="d-block w-100" alt="AG4" />
               </div>
               <div className="carousel-item">
-                <img src="/img/AG5.jpg" className="d-block w-100" alt="AG5" />
+                <img src="./img/AG5.jpg" className="d-block w-100" alt="AG5" />
               </div>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function Musica() {
             </div>
           </div>
 
-          {/* Card 4 - Recuperada */}
+          {/* Card 4 */}
           <div className="col-12 col-md-6 col-lg-4">
             <div 
               className="card shadow-lg border-0 rounded-4" 
@@ -135,7 +135,7 @@ export default function Musica() {
             </div>
           </div>
 
-          {/* Card 5 - Recuperada */}
+          {/* Card 5 */}
           <div className="col-12 col-md-6 col-lg-4">
             <div 
               className="card shadow-lg border-0 rounded-4" 

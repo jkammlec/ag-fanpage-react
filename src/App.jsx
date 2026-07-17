@@ -16,7 +16,7 @@ export default function App() {
               <Link className="nav-link fw-bold" to="/musica">Música</Link>
               
               <Link className="navbar-brand m-0 logo-nav" to="/">
-                <img src="/img/ag-logo.png" alt="Atarashi Gakko" className="logo-nav" />
+                <img src="./img/ag-logo.png" alt="Atarashi Gakko" className="logo-nav" />
               </Link>
               
               <Link className="nav-link fw-bold" to="/contacto">Contacto</Link>

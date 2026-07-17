@@ -1,0 +1,42 @@
+.bg-custom {
+    background-color: #003399;
+}
+
+.btn-custom {
+    background-color: #003399;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #002266;
+    color: white;
+}
+.logo-nav {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 576px) {
+  .logo-nav {
+    max-width: 140px;
+  }
+}
+
+@media (min-width: 768px) {
+  .position-md-absolute {
+    position: absolute !important;
+  }
+  .bottom-md-0 {
+    bottom: 0 !important;
+  }
+  .start-md-50 {
+    left: 50% !important;
+  }
+  .translate-middle-x-md {
+    transform: translateX(-50%) !important;
+  }
+  .bg-md-transparent {
+    background-color: transparent !important;
+  }
+}

@@ -1,17 +1,62 @@
 import React, { useState, useEffect } from 'react';
 
+// 1er COMPONENTE HIJO: TarjetaCancion
+function TarjetaCancion({ id, titulo, alHacerClic }) {
+  return (
+    <div className="col-12 col-md-6 col-lg-4">
+      <div 
+        className="card shadow-lg border-0 rounded-4" 
+        style={{ cursor: 'pointer' }}
+        onClick={() => alHacerClic(id)}
+        data-bs-toggle="modal" 
+        data-bs-target="#playerModal"
+      >
+        <img 
+          src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`} 
+          className="card-img-top" 
+          alt={titulo} 
+        />
+        <div className="card-body text-center">
+          <h6 className="fw-bold">{titulo}</h6>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 2do COMPONENTE HIJO: ElementoComentario
+function ElementoComentario({ nombre, texto }) {
+  return (
+    <div className="card bg-light p-3 mb-2 rounded-3 border-0 shadow-sm">
+      <p className="mb-1">
+        <strong>{nombre}</strong> <span className="text-muted small">hace un momento</span>
+      </p>
+      <p className="mb-0 text-muted small">{texto}</p>
+    </div>
+  );
+}
+
+// COMPONENTE PRINCIPAL
 export default function Musica() {
-  // 1. Estados para el reproductor de video
+  //Estados para el reproductor de video
   const [videoId, setVideoId] = useState('');
 
-  // 2. Estados para los comentarios
+  // Estados para los comentarios
   const [comentarios, setComentarios] = useState([]);
   const [nombre, setNombre] = useState('');
   const [texto, setTexto] = useState('');
 
-  // 3. Este efecto despierta el carrusel de Bootstrap al entrar a la página
+  // Lista de canciones centralizada en un Array
+  const listaCanciones = [
+    { id: 'l446hUqQ7GY', titulo: 'Otonablue' },
+    { id: 'vU06uPjvFGo', titulo: 'Free Your Mind' },
+    { id: 'e0SZ28FP3RI', titulo: 'Suki Lie' },
+    { id: 'ye5v9mOkDh8', titulo: '恋ゲバ' },
+    { id: 'd3v0QqZlCes', titulo: 'Change' }
+  ];
+
+  //Efecto para inicializar el carrusel de Bootstrap al cargar la página
   useEffect(() => {
-    // Verificamos si Bootstrap está cargado en la página
     if (window.bootstrap) {
       const carouselElement = document.getElementById('carouselExampleSlidesOnly');
       if (carouselElement) {
@@ -21,9 +66,9 @@ export default function Musica() {
         });
       }
     }
-  }, []); // Los corchetes vacíos indican que esto se ejecuta solo una vez al cargar el componente
+  }, []); 
 
-  // Función para manejar el clic en las tarjetas de video
+  // Función para cambiar el video del modal
   const reproducir = (id) => {
     setVideoId(id);
   };
@@ -33,7 +78,7 @@ export default function Musica() {
     e.preventDefault(); 
     if (nombre.trim() && texto.trim()) {
       const nuevoComentario = { nombre, texto };
-      setComentarios([nuevoComentario, ...comentarios]); // Ponemos el nuevo primero
+      setComentarios([nuevoComentario, ...comentarios]); // Agrega el nuevo comentario arriba
       setNombre('');
       setTexto('');
     }
@@ -41,120 +86,41 @@ export default function Musica() {
 
   return (
     <main className="flex-grow-1">
-      {/* Carrusel */}
+      
+      {/* SECCIÓN 1: Carrusel de fotos de Atarashi Gakko */}
       <div className="d-flex justify-content-center mt-2">
         <div style={{ maxWidth: '500px', width: '100%' }}>
           <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img src="./img/AG1.jpg" className="d-block w-100" alt="AG1" />
-              </div>
-              <div className="carousel-item">
-                <img src="./img/AG2.jpg" className="d-block w-100" alt="AG2" />
-              </div>
-              <div className="carousel-item">
-                <img src="./img/AG3.jpg" className="d-block w-100" alt="AG3" />
-              </div>
-              <div className="carousel-item">
-                <img src="./img/AG4.jpg" className="d-block w-100" alt="AG4" />
-              </div>
-              <div className="carousel-item">
-                <img src="./img/AG5.jpg" className="d-block w-100" alt="AG5" />
-              </div>
+              <div className="carousel-item active"><img src="./img/AG1.jpg" className="d-block w-100" alt="AG1" /></div>
+              <div className="carousel-item"><img src="./img/AG2.jpg" className="d-block w-100" alt="AG2" /></div>
+              <div className="carousel-item"><img src="./img/AG3.jpg" className="d-block w-100" alt="AG3" /></div>
+              <div className="carousel-item"><img src="./img/AG4.jpg" className="d-block w-100" alt="AG4" /></div>
+              <div className="carousel-item"><img src="./img/AG5.jpg" className="d-block w-100" alt="AG5" /></div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Canciones */}
+      {/* SECCIÓN 2: Rejilla de canciones dinámicas */}
       <div className="container py-5">
         <h2 className="text-center mb-4">5 canciones para conocer Atarashi Gakko</h2>
         <div className="row g-4 justify-content-center">
           
-          {/* Card 1 */}
-          <div className="col-12 col-md-6 col-lg-4">
-            <div 
-              className="card shadow-lg border-0 rounded-4" 
-              style={{ cursor: 'pointer' }}
-              onClick={() => reproducir('l446hUqQ7GY')}
-              data-bs-toggle="modal" 
-              data-bs-target="#playerModal"
-            >
-              <img src="https://img.youtube.com/vi/l446hUqQ7GY/hqdefault.jpg" className="card-img-top" alt="Otonablue" />
-              <div className="card-body text-center">
-                <h6 className="fw-bold">Otonablue</h6>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="col-12 col-md-6 col-lg-4">
-            <div 
-              className="card shadow-lg border-0 rounded-4" 
-              style={{ cursor: 'pointer' }}
-              onClick={() => reproducir('vU06uPjvFGo')}
-              data-bs-toggle="modal" 
-              data-bs-target="#playerModal"
-            >
-              <img src="https://img.youtube.com/vi/vU06uPjvFGo/hqdefault.jpg" className="card-img-top" alt="Free Your Mind" />
-              <div className="card-body text-center">
-                <h6 className="fw-bold">Free Your Mind</h6>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="col-12 col-md-6 col-lg-4">
-            <div 
-              className="card shadow-lg border-0 rounded-4" 
-              style={{ cursor: 'pointer' }}
-              onClick={() => reproducir('e0SZ28FP3RI')}
-              data-bs-toggle="modal" 
-              data-bs-target="#playerModal"
-            >
-              <img src="https://img.youtube.com/vi/e0SZ28FP3RI/hqdefault.jpg" className="card-img-top" alt="Suki Lie" />
-              <div className="card-body text-center">
-                <h6 className="fw-bold">Suki Lie</h6>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 4 */}
-          <div className="col-12 col-md-6 col-lg-4">
-            <div 
-              className="card shadow-lg border-0 rounded-4" 
-              style={{ cursor: 'pointer' }}
-              onClick={() => reproducir('ye5v9mOkDh8')}
-              data-bs-toggle="modal" 
-              data-bs-target="#playerModal"
-            >
-              <img src="https://img.youtube.com/vi/ye5v9mOkDh8/hqdefault.jpg" className="card-img-top" alt="恋ゲバ" />
-              <div className="card-body text-center">
-                <h6 className="fw-bold">恋ゲバ</h6>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 5 */}
-          <div className="col-12 col-md-6 col-lg-4">
-            <div 
-              className="card shadow-lg border-0 rounded-4" 
-              style={{ cursor: 'pointer' }}
-              onClick={() => reproducir('d3v0QqZlCes')}
-              data-bs-toggle="modal" 
-              data-bs-target="#playerModal"
-            >
-              <img src="https://img.youtube.com/vi/d3v0QqZlCes/hqdefault.jpg" className="card-img-top" alt="Change" />
-              <div className="card-body text-center">
-                <h6 className="fw-bold">Change</h6>
-              </div>
-            </div>
-          </div>
+          {/* Mapear el array para renderizar el 1er componente*/}
+          {listaCanciones.map((cancion) => (
+            <TarjetaCancion 
+              key={cancion.id}
+              id={cancion.id}
+              titulo={cancion.titulo}
+              alHacerClic={reproducir} // Pasamos la función del padre al hijo
+            />
+          ))}
 
         </div>
       </div>
 
-      {/* Comentarios */}
+      {/* SECCIÓN 3: Formulario e historial de comentarios */}
       <div className="container pb-5">
         <div className="mx-auto" style={{ maxWidth: '600px' }}>
           <div className="card shadow border-0 rounded-4">
@@ -187,29 +153,33 @@ export default function Musica() {
                 </div>
               </form>
 
-              {/* Lista dinámica de comentarios */}
+              {/* Lista dinámica que utiliza el 2do componente hijo */}
               <div className="mt-4">
                 <hr />
                 <h6 className="fw-bold text-muted mb-3">Comentarios de los fans:</h6>
                 <div>
                   {comentarios.length === 0 ? (
-                    <p className="text-muted small text-center fst-italic">Aún no hay comentarios. ¡Comenta primero!</p>
+                    <p className="text-muted small text-center fst-italic">
+                      Aún no hay comentarios. ¡Comenta primero!
+                    </p>
                   ) : (
                     comentarios.map((comentario, index) => (
-                      <div key={index} className="card bg-light p-3 mb-2 rounded-3 border-0 shadow-sm">
-                        <p className="mb-1"><strong>{comentario.nombre}</strong> <span className="text-muted small">hace un momento</span></p>
-                        <p className="mb-0 text-muted small">{comentario.texto}</p>
-                      </div>
+                      <ElementoComentario 
+                        key={index} 
+                        nombre={comentario.nombre} 
+                        texto={comentario.texto} 
+                      />
                     ))
                   )}
                 </div>
               </div>
+
             </div>
           </div>
         </div>
       </div>
 
-      {/* Modal del reproductor */}
+      {/* SECCIÓN 4: Modal del reproductor de video de YouTube */}
       <div className="modal fade" id="playerModal" tabIndex="-1">
         <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content bg-dark">
@@ -225,6 +195,7 @@ export default function Musica() {
           </div>
         </div>
       </div>
+
     </main>
   );
 }
